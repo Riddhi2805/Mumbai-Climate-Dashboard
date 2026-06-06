@@ -53,38 +53,47 @@ st.divider()
 # ---------- LIVE WEATHER ----------
 url = "https://api.open-meteo.com/v1/forecast?latitude=19.0760&longitude=72.8777&current_weather=true"
 
-response = requests.get(url)
-data = response.json()
+try:
+    response = requests.get(url)
+    data = response.json()
 
-temperature = data["current_weather"]["temperature"]
-windspeed = data["current_weather"]["windspeed"]
+    if "current_weather" in data:
 
-st.subheader("🌦 Live Weather in Mumbai")
+        temperature = data["current_weather"]["temperature"]
+        windspeed = data["current_weather"]["windspeed"]
 
-col1, col2 = st.columns(2)
+        st.subheader("🌦 Live Weather in Mumbai")
 
-col1.metric("🌡 Temperature", f"{temperature} °C")
-col2.metric("💨 Wind Speed", f"{windspeed} km/h")
+        col1, col2 = st.columns(2)
 
-# ---------- WEATHER DESCRIPTION ----------
-if temperature >= 35 and windspeed < 10:
-    weather_desc = "Very hot and calm weather conditions are currently being experienced in Mumbai."
+        col1.metric("🌡 Temperature", f"{temperature} °C")
+        col2.metric("💨 Wind Speed", f"{windspeed} km/h")
 
-elif temperature >= 30 and windspeed < 15:
-    weather_desc = "The weather in Mumbai is hot with light winds."
+        # ---------- WEATHER DESCRIPTION ----------
+        if temperature >= 35 and windspeed < 10:
+            weather_desc = "Very hot and calm weather conditions are currently being experienced in Mumbai."
 
-elif temperature >= 25 and windspeed >= 15:
-    weather_desc = "The weather is warm but the stronger winds make it feel more comfortable."
+        elif temperature >= 30 and windspeed < 15:
+            weather_desc = "The weather in Mumbai is hot with light winds."
 
-elif temperature >= 20:
-    weather_desc = "The weather is pleasant with moderate conditions."
+        elif temperature >= 25 and windspeed >= 15:
+            weather_desc = "The weather is warm but the stronger winds make it feel more comfortable."
 
-else:
-    weather_desc = "The weather is relatively cool in Mumbai today."
+        elif temperature >= 20:
+            weather_desc = "The weather is pleasant with moderate conditions."
 
-st.info(weather_desc)
+        else:
+            weather_desc = "The weather is relatively cool in Mumbai today."
+
+        st.info(weather_desc)
+
+    else:
+        st.warning("Live weather data is currently unavailable.")
+
+except Exception:
+    st.warning("Unable to retrieve live weather data at the moment.")
+
 st.divider()
-
 
 # ---------- ABOUT ----------
 st.subheader("About This Dashboard")
