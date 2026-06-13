@@ -2,11 +2,8 @@ import streamlit as st
 import requests
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
-import time
-
-st.write("Timezone:", time.tzname)
-
-st.write("Current datetime:", datetime.now())
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
@@ -43,7 +40,7 @@ st.divider()
 
 
 # ---------- DATE & TIME ----------
-now = datetime.now()
+now = datetime.now(ZoneInfo("Asia/Kolkata"))
 
 current_date = now.strftime("%d %B %Y")
 current_time = now.strftime("%H:%M:%S")
