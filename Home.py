@@ -12,8 +12,6 @@ st.set_page_config(
 
 # ---------- AUTO REFRESH CLOCK ----------
 st_autorefresh(interval=60000)
-count = st_autorefresh(interval=1000, key="clock")
-st.write("Refresh count:", count)
 
 # ---------- HEADER ----------
 st.title("🌍 Mumbai Climate Analytics Platform")
