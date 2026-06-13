@@ -3,18 +3,18 @@ import requests
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
 
-# ---------- AUTO REFRESH CLOCK ----------
-st_autorefresh(interval=60000)  # refresh every 1 minute
-
-# ---------- HEADER ----------
-st.title("🌍 Mumbai Climate Dashboard")
-
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
-    page_title="Mumbai Climate Dashboard",
+    page_title="Mumbai Climate Analytics Platform",
     page_icon="🌍",
     layout="wide"
 )
+
+# ---------- AUTO REFRESH CLOCK ----------
+st_autorefresh(interval=60000)
+
+# ---------- HEADER ----------
+st.title("🌍 Mumbai Climate Analytics Platform")
 
 # ---------- SIDEBAR ----------
 st.sidebar.title("🌍 Climate Dashboard")
@@ -54,7 +54,7 @@ st.divider()
 url = "https://api.open-meteo.com/v1/forecast?latitude=19.0760&longitude=72.8777&current_weather=true"
 
 try:
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
     data = response.json()
 
     if "current_weather" in data:
