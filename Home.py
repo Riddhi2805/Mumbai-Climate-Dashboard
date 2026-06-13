@@ -2,6 +2,11 @@ import streamlit as st
 import requests
 from datetime import datetime
 from streamlit_autorefresh import st_autorefresh
+import time
+
+st.write("Timezone:", time.tzname)
+
+st.write("Current datetime:", datetime.now())
 
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
